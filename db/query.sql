@@ -5,7 +5,7 @@ INSERT INTO movies (movie_name)
 VALUES ("Casablanca");
 
 DELETE FROM movies
-WHERE id = 4;
+WHERE id = 7;
 
 SELECT *
 FROM movies
