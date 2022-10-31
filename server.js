@@ -38,14 +38,19 @@ app.post('/api/add-movie', (req, res) => {
 
 app.delete('/api/movie/:id', (req,res) => {
     console.log(`${req.params.id} request received to delete`);
-    db.query('DELETE FROM movies WHERE id = ?;', `${req.params.id}`, (req, res) => {
-        console.log(res);
-        res.json(res);
+    console.log(req.params.id)
+    db.query('DELETE FROM movies WHERE id = ?;', `${req.params.id}`, (req, resp) => {
+        console.log(resp);
+        res.send('deleted movie');
     })
 });
 
 app.get('/api/movie-reviews', (req, res) => {
     console.log(`${req.method} request recieved to get movie reviews`);
+    db.query('SELECT *FROM movies JOIN reviews ON reviews.movie_id = movies.id;', (err, results) => {
+        console.log(results);
+        res.json(results);
+    })
 });
 
 app.put('/api/review/:id', (req, res) => {
@@ -54,4 +59,4 @@ app.put('/api/review/:id', (req, res) => {
 
 app.listen(PORT, () =>
 console.log(`App listening at http://localhost${PORT}`)
-);
+)
